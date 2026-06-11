@@ -1,17 +1,8 @@
 {
   "name": "smart-commit-hook",
   "description": "Intelligent commit hook that auto-classifies commits, generates titles and detailed descriptions following Conventional Commits",
-  "version": "1.0.0",
   "author": {
     "name": "nan1010082085",
     "email": "nan1010082085@users.noreply.github.com"
-  },
-  "commands": [
-    {
-      "name": "smart-commit",
-      "description": "Intelligent commit with auto-classification, title, and detailed description",
-      "file": "commands/smart-commit.md"
-    }
-  ],
-  "repository": "git@github.com:nan1010082085/plugin-commit-hook.git"
+  }
 }

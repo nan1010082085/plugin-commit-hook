@@ -40,10 +40,14 @@ mkdir -p "$PLUGIN_INSTALL_DIR"
 echo -e "${BLUE}Copying plugin files...${NC}"
 cp -r "$PLUGIN_SOURCE/.claude-plugin" "$PLUGIN_INSTALL_DIR/"
 cp -r "$PLUGIN_SOURCE/commands" "$PLUGIN_INSTALL_DIR/"
+cp -r "$PLUGIN_SOURCE/skills" "$PLUGIN_INSTALL_DIR/"
 cp "$PLUGIN_SOURCE/commit-classifier.sh" "$PLUGIN_INSTALL_DIR/"
 cp "$PLUGIN_SOURCE/commit-types.json" "$PLUGIN_INSTALL_DIR/"
 cp "$PLUGIN_SOURCE/LICENSE" "$PLUGIN_INSTALL_DIR/"
 cp "$PLUGIN_SOURCE/README.md" "$PLUGIN_INSTALL_DIR/"
+
+# Create .in_use directory (required by Claude Code plugin system)
+mkdir -p "$PLUGIN_INSTALL_DIR/.in_use"
 
 # Make scripts executable
 chmod +x "$PLUGIN_INSTALL_DIR/commit-classifier.sh"

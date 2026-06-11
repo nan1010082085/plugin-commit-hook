@@ -11,10 +11,11 @@ Intelligent commit hook that auto-classifies commits, generates meaningful title
 This plugin provides:
 
 1. **Claude Code Plugin** - `/smart-commit` slash command for Claude Code
-2. **Node.js Module** - Programmatic API for any Node.js application
-3. **CLI Tool** - `smart-commit` command for terminal usage
-4. **Standalone Script** - `commit-classifier.sh` for use by any agent or tool
-5. **Classification Rules** - Configurable `commit-types.json` for custom types
+2. **Claude Code Skill** - `/smart-commit` skill for enhanced integration
+3. **Node.js Module** - Programmatic API for any Node.js application
+4. **CLI Tool** - `smart-commit` command for terminal usage
+5. **Standalone Script** - `commit-classifier.sh` for use by any agent or tool
+6. **Classification Rules** - Configurable `commit-types.json` for custom types
 
 ## Features
 
@@ -44,29 +45,46 @@ This plugin provides:
 
 ## Installation
 
-### As Claude Code Plugin
+### As Claude Code Plugin (Recommended)
+
+Run the installer script:
+
+```bash
+./install-plugin.sh
+```
+
+This will:
+1. Copy plugin files to `~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0/`
+2. Register the plugin in `~/.claude/plugins/installed_plugins.json`
+
+Then restart Claude Code and use the `/smart-commit` command.
+
+**Manual Installation:**
 
 1. Copy the plugin to your Claude Code plugins directory:
    ```bash
-   cp -r /path/to/commit-hook ~/.claude/plugins/
+   mkdir -p ~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0
+   cp -r .claude-plugin commands skills commit-classifier.sh commit-types.json \
+       ~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0/
    ```
 
-2. Add to your installed plugins:
+2. Register in `~/.claude/plugins/installed_plugins.json`:
    ```json
    {
-     "smart-commit-hook@local": [
-       {
-         "scope": "user",
-         "installPath": "~/.claude/plugins/commit-hook",
-         "version": "1.0.0"
-       }
-     ]
+     "version": 2,
+     "plugins": {
+       "smart-commit-hook@custom": [
+         {
+           "scope": "user",
+           "installPath": "~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0",
+           "version": "1.0.0"
+         }
+       ]
+     }
    }
    ```
 
 3. Restart Claude Code
-
-4. Use the `/smart-commit` command
 
 ### As Node.js CLI
 
@@ -171,7 +189,21 @@ The classifier examines:
 - **Branch name** - For ticket IDs and context
 - **Commit history** - For style consistency
 
-### 2. Classification Logic
+### 2. Plugin Structure
+
+```
+.claude-plugin/
+  plugin.json        # Plugin metadata
+commands/
+  smart-commit.md    # Slash command definition
+skills/
+  smart-commit/
+    SKILL.md         # Skill definition for enhanced integration
+commit-classifier.sh # Core classification engine
+commit-types.json    # Configurable commit type rules
+```
+
+### 3. Classification Logic
 
 Priority-based classification:
 1. Check for `revert` patterns
@@ -186,7 +218,7 @@ Priority-based classification:
 10. Check for `ci` patterns (CI/CD config)
 11. Default to `chore`
 
-### 3. Message Generation
+### 4. Message Generation
 
 Following Conventional Commits:
 ```
