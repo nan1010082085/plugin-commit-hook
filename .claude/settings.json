@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "smart-commit-hook@plugin-commit-hook": true
+  }
+}
