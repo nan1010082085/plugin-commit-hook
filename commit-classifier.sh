@@ -570,6 +570,17 @@ Refs: ${ticket_id}"
 # JSON output
 # ============================================================================
 
+# Pure bash JSON string escape (no jq dependency)
+json_escape() {
+    local s="$1"
+    s="${s//\\/\\\\}"     # backslash
+    s="${s//\"/\\\"}"     # double quote
+    s="${s//$'\n'/\\n}"   # newline
+    s="${s//$'\r'/\\r}"   # carriage return
+    s="${s//$'\t'/\\t}"   # tab
+    echo "$s"
+}
+
 output_json() {
     local type="$1"
     local scope="$2"
@@ -580,6 +591,11 @@ output_json() {
     local title="$7"
     local message="$8"
 
+    local escaped_message
+    escaped_message=$(json_escape "$message")
+    local escaped_reasons
+    escaped_reasons=$(json_escape "$reasons")
+
     cat << EOF
 {
   "classification": {
@@ -588,11 +604,11 @@ output_json() {
     "is_breaking": ${is_breaking},
     "confidence": "${confidence}",
     "ticket_id": "${ticket_id:-null}",
-    "reasons": "$(echo "$reasons" | sed 's/,/", "/g')"
+    "reasons": "${escaped_reasons}"
   },
   "message": {
     "title": "${title}",
-    "full": $(echo "$message" | jq -Rs .)
+    "full": "${escaped_message}"
   }
 }
 EOF

@@ -119,13 +119,28 @@ async function classify(options = {}) {
   const cwd = options.cwd || process.cwd();
   const output = await execCommandAsync(`${SCRIPT_PATH} --json --dry-run`, { cwd });
 
-  // Extract JSON from output (skip INFO lines)
-  const jsonMatch = output.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    throw new Error('Failed to parse classification output');
+  // Extract JSON from output using robust line-by-line parsing
+  // The JSON block starts with '{' on its own line and ends with '}'
+  const lines = output.split('\n');
+  let jsonStart = -1;
+  let jsonEnd = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+    if (trimmed === '{' && jsonStart === -1) {
+      jsonStart = i;
+    }
+    if (trimmed === '}' && jsonStart !== -1) {
+      jsonEnd = i;
+    }
   }
 
-  return JSON.parse(jsonMatch[0]);
+  if (jsonStart === -1 || jsonEnd === -1) {
+    throw new Error('Failed to parse classification output: no JSON block found');
+  }
+
+  const jsonStr = lines.slice(jsonStart, jsonEnd + 1).join('\n');
+  return JSON.parse(jsonStr);
 }
 
 /**

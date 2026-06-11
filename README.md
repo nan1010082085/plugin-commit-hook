@@ -425,6 +425,17 @@ git add test.txt
 ./commit-classifier.sh --dry-run
 ```
 
+## Requirements
+
+- **Git** must be installed and configured
+- **Node.js** >= 14.0.0 (for CLI and Node.js API only)
+- No external dependencies required (pure implementation)
+
+### Optional Dependencies
+
+- **GitHub CLI (`gh`)** - For creating pull requests with `/commit-push-pr`
+- **Claude Code** - For using the `/smart-commit` slash command
+
 ## License
 
 MIT License

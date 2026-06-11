@@ -3,11 +3,33 @@
   "version": "1.0.0",
   "description": "Intelligent commit hook that auto-classifies commits, generates titles and detailed descriptions",
   "main": "index.js",
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs",
+      "types": "./index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "index.d.ts",
   "bin": {
     "smart-commit": "./bin/cli.js"
   },
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "bin/",
+    "commit-classifier.sh",
+    "commit-types.json",
+    "setup-hooks.sh",
+    "commands/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "postinstall": "node -e \"try{require('fs').chmodSync(require('path').join(__dirname,'commit-classifier.sh'),0o755)}catch(e){}\""
   },
   "keywords": [
     "git",
@@ -15,7 +37,9 @@
     "conventional-commits",
     "claude",
     "ai",
-    "hook"
+    "hook",
+    "agent",
+    "cli"
   ],
   "author": "nan1010082085",
   "license": "MIT",
