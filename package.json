@@ -1,0 +1,29 @@
+{
+  "name": "smart-commit-hook",
+  "version": "1.0.0",
+  "description": "Intelligent commit hook that auto-classifies commits, generates titles and detailed descriptions",
+  "main": "index.js",
+  "bin": {
+    "smart-commit": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "git",
+    "commit",
+    "conventional-commits",
+    "claude",
+    "ai",
+    "hook"
+  ],
+  "author": "nan1010082085",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nan1010082085/plugin-commit-hook.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -3,14 +3,18 @@
 Intelligent commit hook that auto-classifies commits, generates meaningful titles, and creates detailed descriptions following the [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
 > 📖 **New to the plugin?** Check out the [Quick Start Guide](QUICKSTART.md) to get up and running in 3 steps!
+>
+> 🔧 **Need CLI or Node.js integration?** See the [CLI & Integration Guide](CLI.md)
 
 ## Overview
 
 This plugin provides:
 
 1. **Claude Code Plugin** - `/smart-commit` slash command for Claude Code
-2. **Standalone Script** - `commit-classifier.sh` for use by any agent or tool
-3. **Classification Rules** - Configurable `commit-types.json` for custom types
+2. **Node.js Module** - Programmatic API for any Node.js application
+3. **CLI Tool** - `smart-commit` command for terminal usage
+4. **Standalone Script** - `commit-classifier.sh` for use by any agent or tool
+5. **Classification Rules** - Configurable `commit-types.json` for custom types
 
 ## Features
 
@@ -64,6 +68,22 @@ This plugin provides:
 
 4. Use the `/smart-commit` command
 
+### As Node.js CLI
+
+1. Clone and link:
+   ```bash
+   git clone git@github.com:nan1010082085/plugin-commit-hook.git
+   cd plugin-commit-hook
+   npm link
+   ```
+
+2. Use the `smart-commit` command:
+   ```bash
+   smart-commit --help
+   smart-commit --classify
+   smart-commit --dry-run
+   ```
+
 ### As Standalone Script
 
 1. Make the script executable:
@@ -81,6 +101,20 @@ This plugin provides:
    echo 'export PATH="$PATH:/path/to/commit-hook"' >> ~/.bashrc
    source ~/.bashrc
    ```
+
+### As npm Dependency
+
+```bash
+npm install git@github.com:nan1010082085/plugin-commit-hook.git
+```
+
+```json
+{
+  "dependencies": {
+    "smart-commit-hook": "git@github.com:nan1010082085/plugin-commit-hook.git"
+  }
+}
+```
 
 ## Usage
 
@@ -296,6 +330,27 @@ if ! echo "$MSG" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|build|ci|c
 fi
 ```
 
+### With Node.js
+
+```javascript
+const { classify, generateMessage, commit } = require('smart-commit-hook');
+
+// Classify staged changes
+const classification = await classify();
+console.log(`Type: ${classification.classification.type}`);
+console.log(`Title: ${classification.message.title}`);
+
+// Generate message with stats
+const message = await generateMessage();
+console.log(message.fullMessage);
+
+// Auto commit
+const result = await commit({ autoStage: true });
+console.log(`Committed: ${result.commitHash}`);
+```
+
+See [CLI.md](CLI.md) for full Node.js API documentation.
+
 ### With Other AI Agents
 
 ```python
@@ -304,7 +359,7 @@ import json
 
 def classify_commit():
     result = subprocess.run(
-        ['./commit-classifier.sh', '--json', '--dry-run'],
+        ['node', '-e', "require('smart-commit-hook').classify().then(r => console.log(JSON.stringify(r)))"],
         capture_output=True,
         text=True
     )
