@@ -1,0 +1,9 @@
+{
+  "name": "smart-commit-hook",
+  "description": "Intelligent commit hook that auto-classifies commits, generates titles and detailed descriptions following Conventional Commits",
+  "author": {
+    "name": "Custom",
+    "email": "developer@local"
+  },
+  "version": "1.0.0"
+}

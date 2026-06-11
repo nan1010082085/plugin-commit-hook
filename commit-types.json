@@ -1,0 +1,212 @@
+{
+  "version": "1.0.0",
+  "types": {
+    "feat": {
+      "description": "A new feature",
+      "emoji": "✨",
+      "patterns": [
+        "add.*feature",
+        "implement",
+        "new.*component",
+        "create.*endpoint",
+        "support.*for"
+      ],
+      "filePatterns": []
+    },
+    "fix": {
+      "description": "A bug fix",
+      "emoji": "🐛",
+      "patterns": [
+        "fix",
+        "bug",
+        "issue",
+        "error",
+        "crash",
+        "resolve",
+        "patch"
+      ],
+      "filePatterns": []
+    },
+    "docs": {
+      "description": "Documentation only changes",
+      "emoji": "📝",
+      "patterns": [
+        "readme",
+        "documentation",
+        "comment",
+        "jsdoc",
+        "typedoc"
+      ],
+      "filePatterns": [
+        "*.md",
+        "*.txt",
+        "*.rst",
+        "docs/**",
+        "README*"
+      ]
+    },
+    "style": {
+      "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+      "emoji": "💄",
+      "patterns": [
+        "format",
+        "lint",
+        "style",
+        "whitespace",
+        "indentation",
+        "semicolon"
+      ],
+      "filePatterns": [
+        ".eslintrc*",
+        ".prettierrc*",
+        ".stylelintrc*",
+        "*.css",
+        "*.scss"
+      ]
+    },
+    "refactor": {
+      "description": "A code change that neither fixes a bug nor adds a feature",
+      "emoji": "♻️",
+      "patterns": [
+        "refactor",
+        "restructure",
+        "reorganize",
+        "simplify",
+        "extract",
+        "rename",
+        "move"
+      ],
+      "filePatterns": []
+    },
+    "perf": {
+      "description": "A code change that improves performance",
+      "emoji": "⚡",
+      "patterns": [
+        "performance",
+        "optimize",
+        "speed",
+        "fast",
+        "cache",
+        "lazy",
+        "memo"
+      ],
+      "filePatterns": []
+    },
+    "test": {
+      "description": "Adding missing tests or correcting existing tests",
+      "emoji": "✅",
+      "patterns": [
+        "test",
+        "spec",
+        "coverage",
+        "mock",
+        "stub",
+        "fixture"
+      ],
+      "filePatterns": [
+        "*.test.*",
+        "*.spec.*",
+        "__tests__/**",
+        "test/**",
+        "tests/**"
+      ]
+    },
+    "build": {
+      "description": "Changes that affect the build system or external dependencies",
+      "emoji": "📦",
+      "patterns": [
+        "build",
+        "webpack",
+        "vite",
+        "rollup",
+        "babel",
+        "typescript",
+        "tsconfig",
+        "package.json",
+        "dependency",
+        "upgrade"
+      ],
+      "filePatterns": [
+        "package.json",
+        "package-lock.json",
+        "yarn.lock",
+        "pnpm-lock.yaml",
+        "tsconfig.json",
+        "webpack.config.*",
+        "vite.config.*",
+        "rollup.config.*"
+      ]
+    },
+    "ci": {
+      "description": "Changes to CI configuration files and scripts",
+      "emoji": "🔧",
+      "patterns": [
+        "ci",
+        "pipeline",
+        "workflow",
+        "github actions",
+        "jenkins",
+        "travis",
+        "circle"
+      ],
+      "filePatterns": [
+        ".github/**",
+        ".gitlab-ci.yml",
+        "Jenkinsfile",
+        ".travis.yml",
+        ".circleci/**"
+      ]
+    },
+    "chore": {
+      "description": "Other changes that don't modify src or test files",
+      "emoji": "🔨",
+      "patterns": [
+        "chore",
+        "maintenance",
+        "cleanup",
+        "update.*config",
+        "setup"
+      ],
+      "filePatterns": [
+        ".gitignore",
+        ".editorconfig",
+        "*.config.*"
+      ]
+    },
+    "revert": {
+      "description": "Reverts a previous commit",
+      "emoji": "⏪",
+      "patterns": [
+        "revert",
+        "undo",
+        "rollback"
+      ],
+      "filePatterns": []
+    }
+  },
+  "scopes": {
+    "autoDetect": true,
+    "commonScopes": [
+      "api",
+      "ui",
+      "auth",
+      "db",
+      "config",
+      "deps",
+      "core",
+      "utils",
+      "hooks",
+      "components",
+      "pages",
+      "services",
+      "models",
+      "middleware"
+    ]
+  },
+  "breakingChangeIndicators": [
+    "BREAKING CHANGE",
+    "breaking:",
+    "!:",
+    "major"
+  ]
+}
