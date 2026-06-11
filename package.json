@@ -1,6 +1,6 @@
 {
   "name": "smart-commit-hook",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Intelligent commit hook that auto-classifies commits, generates titles and detailed descriptions",
   "main": "index.js",
   "exports": {

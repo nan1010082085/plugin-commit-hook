@@ -54,8 +54,10 @@ Run the installer script:
 ```
 
 This will:
-1. Copy plugin files to `~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0/`
-2. Register the plugin in `~/.claude/plugins/installed_plugins.json`
+1. Register the marketplace in `~/.claude/plugins/known_marketplaces.json`
+2. Clone/update the marketplace repository
+3. Copy plugin files to `~/.claude/plugins/cache/plugin-commit-hook/smart-commit-hook/<version>/`
+4. Register the plugin in `~/.claude/plugins/installed_plugins.json`
 
 Then restart Claude Code and use the `/smart-commit` command.
 
@@ -63,9 +65,9 @@ Then restart Claude Code and use the `/smart-commit` command.
 
 1. Copy the plugin to your Claude Code plugins directory:
    ```bash
-   mkdir -p ~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0
+   mkdir -p ~/.claude/plugins/cache/plugin-commit-hook/smart-commit-hook/1.0.0
    cp -r .claude-plugin commands skills commit-classifier.sh commit-types.json \
-       ~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0/
+       ~/.claude/plugins/cache/plugin-commit-hook/smart-commit-hook/1.0.0/
    ```
 
 2. Register in `~/.claude/plugins/installed_plugins.json`:
@@ -73,10 +75,10 @@ Then restart Claude Code and use the `/smart-commit` command.
    {
      "version": 2,
      "plugins": {
-       "smart-commit-hook@custom": [
+       "smart-commit-hook@plugin-commit-hook": [
          {
            "scope": "user",
-           "installPath": "~/.claude/plugins/cache/custom/smart-commit-hook/1.0.0",
+           "installPath": "~/.claude/plugins/cache/plugin-commit-hook/smart-commit-hook/1.0.0",
            "version": "1.0.0"
          }
        ]
@@ -486,4 +488,4 @@ Custom Development
 
 ## Version
 
-1.0.0
+2.0.0
